@@ -42,7 +42,7 @@ function test_callback(){
 $args = array (
   'foo' => 'bar',
   'hello' => 'world',
-  0 => 123
+   0 => 123
 );
 
 call_user_func('test_callback', $args);
