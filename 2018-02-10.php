@@ -14,42 +14,9 @@
 
 require './personal/li_func.php';
 
-class Connection {
-    protected $link;
-    private $server, $username, $password, $db;
-     
-    public function __construct($server, $username, $password, $db)
+    interface Logger
     {
-        $this->server = $server;
-        $this->username = $username;
-        $this->password = $password;
-        $this->db = $db;
-        $this->connect();
-        echo __METHOD__;
-    }
-     
-    private function connect()
-    {
-        $this->link = mysqli_connect($this->server, $this->username, $this->password,$this->db);
-    }
-     
-    public function __sleep()
-    {
-        echo __METHOD__;
-        return array('server', 'username', 'password', 'db' );
-    }
-
-     public function query()
-    {
-        echo __METHOD__;
-    }
-     
-    public function __wakeup()
-    {
-        $this->db = 'test1'; // 更改数据库
-        $this->connect();
-        echo __METHOD__;
-    }
+        public function log (string $msg);
 }
 
 // 1
@@ -85,13 +52,51 @@ $inner = function($a){
 };
 $func($inner('lizhi'));
 
-interface Logger { 
-   public function log(string $msg); 
-} 
+    class Connection
+    {
+        protected $link;
+        private $server, $username, $password, $db;
+
+        public function __construct ($server, $username, $password, $db)
+        {
+            $this->server   = $server;
+            $this->username = $username;
+            $this->password = $password;
+            $this->db       = $db;
+            $this->connect ();
+            echo __METHOD__;
+        }
+
+        private function connect ()
+        {
+            $this->link = mysqli_connect ($this->server, $this->username, $this->password, $this->db);
+        }
+
+        public function __sleep ()
+        {
+            echo __METHOD__;
+            return array ('server', 'username', 'password', 'db');
+        }
+
+        public function query ()
+        {
+            echo __METHOD__;
+        }
+
+        public function __wakeup ()
+        {
+            $this->db = 'test1'; // 更改数据库
+            $this->connect ();
+            echo __METHOD__;
+        }
+    }
  
-class Application { 
-   private $logger; 
-   public function getLogger(): Logger { 　　// php7 可用
+class Application {
+    private $logger;
+
+    // php7 可用
+    public function getLogger (): Logger
+    {
       return $this->logger; 
    } 
  

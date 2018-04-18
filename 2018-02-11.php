@@ -20,7 +20,7 @@ $format = sscanf($str,"%s %s %s %6f %s %d %s %s %c"); // 2个参数是返回数�
 dump($format);
 
 // CI框架里面应用
-if(sscanf($RTR->routes['404_override'], '%[^/]/%s', $error_class, $error_method) !== 2)
+  if (sscanf ($RTR->routes['404_override'], '%[^/]/%s', $error_class, $error_method) !== 2) return false;
 
 
 
