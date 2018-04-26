@@ -125,4 +125,3 @@
     echo (new SimpleFactoty())->create ('firefox')->PrintPage ();
     $firefox = (new SimpleFactoty())->create ('firefox');
     $firefox->PrintPage ();
-    $firefox->a ();
