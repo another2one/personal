@@ -50,6 +50,7 @@
 
         function PrintPage ($url = '')
         {
+            echo 'get_called_class():显示' . get_called_class () . '<br/>';
             $url or $url = $this->homepage;
             $this->page = $url . '源码';
             $this->cssParse ();
