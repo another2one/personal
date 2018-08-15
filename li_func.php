@@ -99,7 +99,7 @@ if( ! function_exists('G') )
             $_info[$start]  =   $end;
         }elseif(!empty($end)){ // 统计时间和内存使用
             if(!isset($_info[$end])) $_info[$end]       =  microtime(TRUE);
-            if(MEMORY_LIMIT_ON && $dec=='m'){
+            if($dec == 'm') {
                 if(!isset($_mem[$end])) $_mem[$end]     =  memory_get_usage();
                 return number_format(($_mem[$end]-$_mem[$start])/1024,4).'M';
             }else{
@@ -107,8 +107,8 @@ if( ! function_exists('G') )
             }
 
         }else{ // 记录时间和内存使用
-            $_info[$start]  =  microtime(TRUE);
-            if(MEMORY_LIMIT_ON) $_mem[$start]           =  memory_get_usage();
+            $_info[$start] =  microtime(TRUE);
+            $_mem[$start]  = memory_get_usage();
         }
         return null;
     }
